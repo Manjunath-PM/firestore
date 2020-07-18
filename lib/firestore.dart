@@ -3,7 +3,6 @@ import 'package:firestore/downloadPage.dart';
 import 'package:firestore/values.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:shimmer/shimmer.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
 class ListPage extends StatefulWidget {
