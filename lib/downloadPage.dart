@@ -40,6 +40,7 @@ class _DownloadPageState extends State<DownloadPage> {
   bool ifUrlPresent = true;
   Dio dio;
   bool cancelDownload = false;
+  CancelToken cancelToken;
 
   @override
   void initState() {
@@ -76,7 +77,8 @@ class _DownloadPageState extends State<DownloadPage> {
       var appDocDir = await getApplicationDocumentsDirectory();
       path = '${appDocDir.path}/${widget.filename}.pdf';
       dio = Dio();
-      await dio.download(widget.url, path, onReceiveProgress: (rec, total) {
+      await dio.download(widget.url, path, cancelToken: cancelToken,
+          onReceiveProgress: (rec, total) {
         print('rec:$rec, total:$total');
         var percentage = rec / total * 100;
         setState(() {
@@ -103,6 +105,7 @@ class _DownloadPageState extends State<DownloadPage> {
         alreadyDownloaded = false;
         downloading = false;
         progressDialog.hide();
+
         Fluttertoast.showToast(
             msg: "Download failed",
             toastLength: Toast.LENGTH_SHORT,
@@ -137,7 +140,7 @@ class _DownloadPageState extends State<DownloadPage> {
           downloading = false;
         });
         Fluttertoast.showToast(
-            msg: "${widget.filename} Deleted",
+            msg: ' "${widget.filename}" - Deleted',
             toastLength: Toast.LENGTH_SHORT,
             gravity: ToastGravity.TOP,
             timeInSecForIosWeb: 1,
@@ -359,9 +362,20 @@ class _DownloadPageState extends State<DownloadPage> {
                                       );
                                       progressDialog.update(
                                           message: 'Downloading file',
-                                          progressWidget:
-                                              CircularProgressIndicator(
-                                            backgroundColor: Colors.deepOrange,
+                                          progressWidget: Column(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            children: <Widget>[
+                                              Container(
+                                                child:
+                                                    CircularProgressIndicator(
+                                                  backgroundColor:
+                                                      Colors.deepOrange,
+                                                ),
+                                                height: 30,
+                                                width: 30,
+                                              ),
+                                            ],
                                           ));
                                       if (widget.url == '') {
                                         progressDialog.hide();

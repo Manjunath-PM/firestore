@@ -1,4 +1,5 @@
 import 'package:firestore/firestore.dart';
+import 'package:firestore/first_Puc_text_books.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -11,6 +12,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(
         primarySwatch: Colors.blue,
@@ -28,7 +30,8 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   void nextPage() {
-    Navigator.of(context).push(MaterialPageRoute(builder: (_) => ListPage()));
+    Navigator.of(context)
+        .push(MaterialPageRoute(builder: (_) => FirstPucTextBooks()));
   }
 
   @override
