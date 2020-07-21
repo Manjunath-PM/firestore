@@ -1,7 +1,9 @@
-import 'package:firestore/firestore.dart';
-import 'package:firestore/first_Puc_text_books.dart';
+import 'package:firestore/welcome.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+
+import 'Screens/drawerScreen.dart';
+import 'Screens/homeScreen.dart';
 
 void main() {
   runApp(MyApp());
@@ -18,37 +20,31 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: MyHomePage(),
+      home: LoginScreen(),
     );
   }
 }
 
-class MyHomePage extends StatefulWidget {
+class MyApp1 extends StatefulWidget {
   @override
-  _MyHomePageState createState() => _MyHomePageState();
+  _MyApp1State createState() => _MyApp1State();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
-  void nextPage() {
-    Navigator.of(context)
-        .push(MaterialPageRoute(builder: (_) => FirstPucTextBooks()));
+class _MyApp1State extends State<MyApp1> {
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("Firestore demo"),
-      ),
-      body: Center(
-        child: RaisedButton(
-          color: Colors.blue,
-          onPressed: nextPage,
-          child: Text(
-            "open",
-            style: TextStyle(color: Colors.white),
-          ),
-        ),
+      body: Stack(
+        children: <Widget>[
+          DrawerScreen(),
+          HomeScreen(),
+        ],
       ),
     );
   }
